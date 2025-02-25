@@ -10,13 +10,13 @@ import java.util.List;
 
 public class MainSomme {
     public static void main(String[] args) {
-        int[] tableau = new int[1000];
+        int[] tableau = new int[20000];
         for (int i = 0; i < tableau.length; i++) {
-            tableau[i] = i + 1; // Tableau rempli de 1 à 1000
+            tableau[i] = i + 1;
         }
 
         int nombreThreads = 5;
-        ExecutorService pool = Executors.newFixedThreadPool(nombreThreads);
+        ExecutorService executorService = Executors.newFixedThreadPool(nombreThreads);
         List<Future<Integer>> resultats = new ArrayList<>();
 
         int taillePlage = tableau.length / nombreThreads;
@@ -24,11 +24,7 @@ public class MainSomme {
         for (int i = 0; i < nombreThreads; i++) {
             int debut = i * taillePlage;
             int fin = (i == nombreThreads - 1) ? tableau.length : debut + taillePlage;
-            Sommeur sommeur = new Sommeur(tableau, debut, fin);
-            Future<Integer> future = pool.submit(() -> {
-                sommeur.run();
-                return sommeur.getSomme();
-            });
+            Future<Integer> future = executorService.submit(new Sommeur(tableau, debut, fin));
             resultats.add(future);
         }
 
@@ -41,8 +37,9 @@ public class MainSomme {
             }
         }
 
-        pool.shutdown();
+        executorService.shutdown();
 
         System.out.println("Somme totale du tableau : " + sommeTotale);
     }
 }
+
