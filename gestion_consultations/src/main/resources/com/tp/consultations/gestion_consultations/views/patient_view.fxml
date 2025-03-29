@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.tp.consultations.gestion_consultations.controllers.PatientController"
+      style="-fx-background-color: #F4F6F9; -fx-padding: 20;">
+
+    <Label text="Gestion des Patients" style="-fx-text-fill: #333;">
+        <font>
+            <Font name="Arial Bold" size="24"/>
+        </font>
+    </Label>
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
+
+        <TextField fx:id="nomField" promptText="Nom" GridPane.columnIndex="0"/>
+        <TextField fx:id="prenomField" promptText="Prénom" GridPane.columnIndex="1"/>
+
+        <DatePicker fx:id="dateNaissancePicker" promptText="Date de naissance" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="telephoneField" promptText="Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Ajouter" onAction="#ajouterPatient" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Modifier" onAction="#modifierPatient" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Supprimer" onAction="#supprimerPatient" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-cursor: hand;"/>
+    </HBox>
+
+    <TableView fx:id="patientTable" prefHeight="250" style="-fx-background-color: white;">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNom" text="Nom" prefWidth="120"/>
+            <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="120"/>
+            <TableColumn fx:id="colDateNaissance" text="Date Naissance" prefWidth="120"/>
+            <TableColumn fx:id="colTelephone" text="Téléphone" prefWidth="120"/>
+        </columns>
+    </TableView>
+
+</VBox>
